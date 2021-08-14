@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Confirm Deposit";
+}
+
+<h1 class="display-4">Confirm Deposit</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Deposit">
+            <div class="form-group">
+                <p for="AccountNumber" class="control-label">Account No: @ViewBag.AccountNumber</p>
+                <input id="AccountNumber" name="AccountNumber" class="form-control" value=@ViewBag.AccountNumber type="hidden" />
+                <p for="Amount" class="control-label">Deposit Amount: @ViewBag.Amount</p>
+                <input id="Amount" name="Amount" class="form-control" value=@ViewBag.Amount type="hidden" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Confirm" class="btn btn-primary" />
+                <input asp-action="Index" type="submit" value="Cancel" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to Accounts</a>
+</div>

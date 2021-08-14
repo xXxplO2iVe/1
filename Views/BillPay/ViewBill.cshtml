@@ -1,0 +1,40 @@
+﻿@model Account
+
+@{
+    ViewData["Title"] = "Account Bills";
+}
+
+<div>
+    <h1 class="display-4">Account Bills</h1>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.BillPays[0].PayeeID)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPays[0].Payee.Name)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPays[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPays[0].ScheduleTimeUtc)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPays[0].Period)</th>
+            <th></th>
+        </tr>
+        @foreach (var bill in Model.BillPays)
+        {
+            <tr>
+                @{
+                    string localTime = bill.ScheduleTimeUtc.ToLocalTime().ToString();
+                }
+                <td>@Html.DisplayFor(x => bill.PayeeID)</td>
+                <td>@Html.DisplayFor(x => bill.Payee.Name)</td>
+                <td>@Html.DisplayFor(x => bill.Amount)</td>
+                <td>@Html.DisplayFor(x => localTime)</td>
+                <td>@Html.DisplayFor(x => bill.Period)</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="EditBill" asp-route-id="@bill.BillPayID">Edit</a> | 
+                    <a class="btn btn-primary" asp-action="DeleteBill" asp-route-id="@bill.BillPayID">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

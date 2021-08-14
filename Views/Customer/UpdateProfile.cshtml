@@ -1,0 +1,55 @@
+﻿@model Customer
+
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="UpdateProfile" method="Post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input asp-for="Name" id="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="TFN" class="control-label">TFN</label>
+                <input asp-for="TFN" id="TFN" class="form-control" />
+                <span asp-validation-for="TFN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Address" class="control-label">Address</label>
+                <input asp-for="Address" id="Address"  class="form-control"/>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="City" class="control-label">City</label>
+                <input asp-for="Suburb" id="City" class="form-control"/>
+                <span asp-validation-for="Suburb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="State" class="control-label">State</label>
+                <input asp-for="State" id="State"  class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Postcode" class="control-label">Postcode</label>
+                <input asp-for="Postcode" id="PostCode" class="form-control"/>
+                <span asp-validation-for="Postcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Mobile" class="control-label">Mobile</label>
+                <input asp-for="Mobile" id="Mobile" class="form-control" />
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update Profile" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

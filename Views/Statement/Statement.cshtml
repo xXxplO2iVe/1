@@ -1,0 +1,51 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@model IPagedList<Transaction>
+@{
+    ViewData["Title"] = "Account Statement";
+}
+
+<div>
+    <h1 class="display-4">Account Statement</h1>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionID)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x[0].DestinationAccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Comment)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionTimeUtc)</th>
+        </tr>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                @{
+                    string localTime = transaction.TransactionTimeUtc.ToLocalTime().ToString();
+                }
+                <th>@Html.DisplayFor(x => transaction.TransactionID)</th>
+                <th>@Html.DisplayFor(x => transaction.TransactionType)</th>
+                <th>@Html.DisplayFor(x => transaction.AccountNumber)</th>
+                <th>@Html.DisplayFor(x => transaction.DestinationAccountNumber)</th>
+                <th>@Html.DisplayFor(x => transaction.Amount)</th>
+                <th>@Html.DisplayFor(x => transaction.Comment)</th>
+                <th>@Html.DisplayFor(x => localTime)</th>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Statement", new { page }),
+    new PagedListRenderOptions
+        {
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" }
+    })
+</div>
+<div>
+    <a asp-action="Index">Back to Statement Account Select</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

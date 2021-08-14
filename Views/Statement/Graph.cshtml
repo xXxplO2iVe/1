@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Chart";
+}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">google.charts.load('current', { packages: ['corechart'] });</script>
+<div>
+    <h1 class="display-4">Account Chart</h1>
+    <div id="chart1" style="width: 750px; height: 300px; margin: 50px auto"></div>
+    <script language="JavaScript">
+            function drawChart() {
+
+                // Define the chart to be drawn.
+                var data = google.visualization.arrayToDataTable([
+                    ['Money', 'Amount'],
+                    ['In', @ViewBag.In],
+                     ['Out', @ViewBag.Out]
+                ]);
+
+                var options =
+                {
+                    title: 'Total Transaction Amount by Transaction Type',
+                    titleTextStyle: {
+                        fontSize: 18,
+                        bold: true
+                    }
+                };
+
+                // Instantiate and draw the chart.
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart1'));
+                chart.draw(data, options);
+            }
+            google.charts.setOnLoadCallback(drawChart);
+    </script>
+    <div id="chart2" style="width: 750px; height: 300px; margin: 50px auto"></div>
+    <script language="JavaScript">
+        function drawChart()
+        {
+
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Transaction Type');
+            data.addColumn('number', 'Percentage');
+            data.addRows([
+                ['Deposit',@ViewBag.Deposit],
+                ['Withdraw', @ViewBag.Withdraw],
+                ['Service Charge', @ViewBag.Service],
+                ['Transfer In', @ViewBag.TransferIn],
+                ['Transfer Out', @ViewBag.TransferOut],
+                ['Bill Pay', @ViewBag.BillPay]
+            ]);
+
+            var options =
+            {
+                title: 'Total Transaction Amount by Transaction Type',
+                titleTextStyle: {
+                    fontSize: 18,
+                    bold: true
+                }
+            };
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('chart2'));
+            chart.draw(data, options);
+        }
+            google.charts.setOnLoadCallback(drawChart);
+    </script>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Statement Account Select</a>
+</div>
