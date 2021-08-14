@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Account>
+
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<h1 class="display-4">Acounts</h1>
+<div>
+    <table class="table">
+        <tr>
+            <th>Account Number</th>
+            <th>Account Type</th>
+            <th>Customer ID</th>
+
+            <th></th>
+        </tr>
+        @foreach (var account in Model)
+        {
+    <tr>
+        <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+        <td>@Html.DisplayFor(x => account.AccountType)</td>
+        <td>@Html.DisplayFor(x => account.CustomerID)</td>
+        <td>
+            <a class="btn btn-primary" asp-action="History" asp-route-id="@account.AccountNumber">View Transactions</a>
+        </td>
+    </tr>
+        }
+    </table>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

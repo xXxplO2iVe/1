@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BillPay>
+
+@{
+    ViewData["Title"] = "Block/Unblock BillPay";
+}
+
+<h1 class="display-4">Block/Unblock BillPay</h1>
+<div>
+    <table class="table">
+        <tr>
+            <th>Bill Pay ID</th>
+            <th>Account Number</th>
+            <th>Payee ID</th>
+            <th>Schedule Time</th>
+            <th></th>
+        </tr>
+        @foreach (var billPay in Model)
+        {
+    <tr>
+        <td>@Html.DisplayFor(x => billPay.BillPayID)</td>
+        <td>@Html.DisplayFor(x => billPay.AccountNumber)</td>
+        <td>@Html.DisplayFor(x => billPay.PayeeID)</td>
+        <td>@Html.DisplayFor(x => billPay.ScheduleTimeUtc )</td>
+        <td>
+            @if (billPay.Blocked == false)
+                    {
+            <a class="btn btn-primary" asp-action="BlockUnblock" asp-route-id="@billPay.BillPayID">Block</a>
+                    }
+                    else
+                    {
+            <a class="btn btn-primary" asp-action="BlockUnblock" asp-route-id="@billPay.BillPayID">Unblock</a>
+                    }
+        </td>
+    </tr>
+        }
+    </table>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
